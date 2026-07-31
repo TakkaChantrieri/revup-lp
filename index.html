@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REVUP｜Googleマップ口コミを、新しいお客様との出会いに。</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky:#2E9BD6;
+    --mint:#2FBF9B;
+    --sun:#FFC24B;
+    --coral:#FF7A59;
+    --paper:#F6FBFA;
+    --mist:#EAF6F2;
+    --line:#DCEAE7;
+    --ink:#173B4D;
+    --sub:#5C7480;
+    --white:#FFFFFF;
+    --gold:#E7C878;
+    --navy:#1B2A3A;
+    --navy2:#24384A;
+    --radius:14px;
+    --shadow: 0 18px 40px -22px rgba(23,59,77,0.28);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Zen Kaku Gothic New', sans-serif; color:var(--ink); background:var(--paper); line-height:1.75; -webkit-font-smoothing:antialiased;}
+  .mincho{font-family:'Shippori Mincho B1', serif;}
+  .mono{font-family:'JetBrains Mono', monospace;}
+  a{color:inherit; text-decoration:none;}
+  img,svg{display:block; max-width:100%;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
+  .eyebrow{display:inline-flex; align-items:center; gap:9px; font-size:15px; letter-spacing:.12em; font-weight:700; color:var(--mint); text-transform:uppercase;}
+  .eyebrow::before{content:"";width:18px;height:1px;background:currentColor;display:inline-block;}
+  button, .btn{cursor:pointer; border:none; font-family:inherit;}
+  :focus-visible{outline:3px solid var(--sun); outline-offset:3px;}
+
+  header.nav{position:sticky; top:0; z-index:50; background:rgba(255,255,255,.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--line);}
+  .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:1120px; margin:0 auto;}
+  .logo{color:var(--ink); font-weight:800; font-size:20px; letter-spacing:.02em; display:flex; align-items:baseline; gap:6px;}
+  .logo span{color:var(--mint); font-family:'JetBrains Mono',monospace; font-size:14px;}
+  .nav-cta{background:linear-gradient(135deg, var(--sky), var(--mint)); color:var(--white); font-weight:700; padding:10px 20px; border-radius:999px; font-size:14px; transition:transform .15s ease, box-shadow .15s ease;}
+  .nav-cta:hover{transform:translateY(-1px); box-shadow:0 8px 20px -8px rgba(46,155,214,.55);}
+
+  .hero{position:relative; overflow:hidden; background:linear-gradient(120deg, var(--sky) 0%, var(--mint) 100%); color:var(--white); padding:88px 0 120px;}
+  .clouds{position:absolute; inset:0; opacity:.5; pointer-events:none;}
+  .wave-divider{position:absolute; left:0; right:0; bottom:-1px; line-height:0;}
+  .wave-divider svg{width:100%; height:90px; display:block;}
+  .hero-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center; position:relative; z-index:2;}
+  .hero h1{font-size:clamp(30px,4.1vw,48px); line-height:1.5; font-weight:800; margin:18px 0 20px;}
+  .hero h1 em{font-style:normal; color:#FFF7E6; background:linear-gradient(180deg, transparent 62%, rgba(255,194,75,.45) 62%);}
+  .hero p.lead{font-size:15.5px; color:#EAF7F2; max-width:44ch; margin-bottom:28px;}
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn-primary{background:var(--sun); color:var(--ink); font-weight:700; font-size:15px; padding:16px 28px; border-radius:999px; box-shadow:0 14px 30px -12px rgba(255,194,75,.6); transition:transform .15s ease;}
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{border:1px solid rgba(255,255,255,.5); color:var(--white); font-weight:600; font-size:15px; padding:16px 26px; border-radius:999px; transition:background .15s ease;}
+  .btn-ghost:hover{background:rgba(255,255,255,.12);}
+
+  .map-card{background:var(--white); color:var(--ink); border-radius:18px; padding:24px 24px 20px; box-shadow:var(--shadow); position:relative;}
+  .map-card::before{content:"例）導入後のイメージ"; position:absolute; top:-13px; left:22px; background:var(--coral); color:#fff; font-size:11px; font-weight:700; padding:5px 12px; border-radius:999px; letter-spacing:.04em;}
+  .map-card-top{display:flex; align-items:center; gap:12px; margin-bottom:12px; margin-top:6px;}
+  .pin{width:36px; height:36px; border-radius:50% 50% 50% 0; background:var(--coral); transform:rotate(-45deg); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .pin::after{content:"";width:11px;height:11px;background:#fff;border-radius:50%; transform:rotate(45deg);}
+  .map-card-title{font-weight:700; font-size:16px;}
+  .map-card-sub{font-size:12px; color:var(--sub);}
+  .rating-row{display:flex; align-items:center; gap:10px; margin:12px 0 4px;}
+  .stars{display:flex; gap:2px;}
+  .stars svg{width:19px; height:19px;}
+  .rating-num{font-family:'JetBrains Mono',monospace; font-weight:700; font-size:21px;}
+  .rating-count{font-size:12px; color:var(--sub);}
+  .kpi-row{display:flex; gap:10px; margin-top:16px;}
+  .kpi{flex:1; background:var(--mist); border-radius:10px; padding:11px 10px 9px; text-align:center;}
+  .kpi .num{font-family:'JetBrains Mono',monospace; font-weight:700; font-size:17px; color:var(--mint);}
+  .kpi .label{font-size:10.5px; color:var(--sub); margin-top:2px;}
+
+  section{padding:76px 0;}
+  .section-head{max-width:620px; margin-bottom:32px;}
+  .section-head h2{font-size:clamp(22px,2.8vw,32px); margin-top:12px; font-weight:800;}
+  .section-head p{color:var(--sub); margin-top:10px; font-size:14.5px;}
+
+  /* fit (self-recognition pain points) */
+  .fit{background:var(--paper); padding-top:60px;}
+  .fit-grid{display:flex; flex-direction:column; gap:14px;}
+  .fit-card{display:flex; align-items:center; gap:18px; background:var(--white); border-left:3px solid var(--coral); border-radius:0 var(--radius) var(--radius) 0; padding:16px 20px; box-shadow:0 10px 22px -18px rgba(23,59,77,.3);}
+  .fit-card .check{display:flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:#FFF0EA; color:var(--coral); font-size:14px; font-weight:700; flex-shrink:0;}
+  .fit-card p{flex:1; font-size:14px; color:var(--ink); font-weight:500;}
+  .fit-card-illust{width:56px; height:56px; flex-shrink:0;}
+  .fit-resolve{text-align:center; font-family:'Shippori Mincho B1',serif; font-size:22px; font-weight:800; color:var(--sky); margin-top:30px;}
+
+  /* numbered card system (why / problem / benefits) */
+  .num-list{display:flex; flex-direction:column; gap:14px;}
+  .num-card{display:flex; align-items:center; gap:20px; background:var(--white); border:1px solid var(--line); border-radius:var(--radius); padding:18px 22px;}
+  .num-card-content{flex:1;}
+  .num-card-head{display:flex; align-items:center; gap:12px; margin-bottom:5px;}
+  .num-badge{width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-family:'JetBrains Mono',monospace; font-weight:700; font-size:13px; flex-shrink:0;}
+  .num-card-content h3{font-size:15.5px; font-weight:700;}
+  .num-card-content p{font-size:13px; color:var(--sub);}
+  .num-card-illust{width:64px; height:64px; flex-shrink:0;}
+  .why .num-badge{background:var(--sky);}
+  .problem .num-badge{background:var(--coral);}
+  .benefits .num-badge{background:var(--mint);}
+  .why{background:var(--paper);}
+  .problem{background:var(--mist);}
+  .benefits{background:var(--paper);}
+
+  .founder{background:var(--paper);}
+  .founder-card{display:flex; align-items:center; gap:32px; background:linear-gradient(135deg, var(--mist), var(--white)); border:1px solid var(--line); border-radius:20px; padding:36px 40px;}
+  .founder-avatar{width:92px; height:92px; flex-shrink:0;}
+  .founder-tags{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;}
+  .founder-tags .tag{font-size:12px; font-weight:700; color:var(--sky); background:#E7F5FC; padding:6px 14px; border-radius:999px;}
+  .founder-quote{font-family:'Shippori Mincho B1',serif; font-size:18px; font-weight:700; line-height:1.85; color:var(--ink);}
+  .founder-name{margin-top:12px; font-size:12.5px; color:var(--sub);}
+  @media (max-width:700px){ .founder-card{flex-direction:column; text-align:center; padding:32px 26px;} .founder-tags{justify-content:center;} }
+
+  .solution{background:var(--mist);}
+  .feat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
+  .feat-card{background:var(--white); border-radius:var(--radius); padding:24px 20px; box-shadow:0 10px 24px -18px rgba(23,59,77,.25);}
+  .feat-icon{width:38px; height:38px; border-radius:10px; background:linear-gradient(135deg, var(--sky), var(--mint)); display:flex; align-items:center; justify-content:center; margin-bottom:14px;}
+  .feat-icon svg{width:20px;height:20px; stroke:#fff;}
+  .feat-card h3{font-size:15px; font-weight:700; margin-bottom:6px;}
+  .feat-card p{font-size:12.5px; color:var(--sub);}
+
+  .flow{background:var(--paper);}
+  .flow-list{display:flex; flex-direction:column;}
+  .flow-item{display:grid; grid-template-columns:88px 1fr; gap:20px; padding:22px 0; border-top:1px solid var(--line);}
+  .flow-num{font-family:'JetBrains Mono',monospace; font-weight:700; font-size:24px; color:var(--sky); opacity:.9;}
+  .flow-num.free{font-family:'Zen Kaku Gothic New',sans-serif; font-size:13px; font-weight:700; color:var(--navy); background:var(--sun); border-radius:999px; padding:6px 4px; text-align:center; width:56px;}
+  .flow-item h3{font-size:15.5px; font-weight:700; margin-bottom:4px;}
+  .flow-item p{font-size:13px; color:var(--sub); max-width:58ch;}
+  .flow-contract{display:flex; align-items:center; gap:14px; padding:16px 0;}
+  .flow-contract::before, .flow-contract::after{content:""; flex:1; height:1px; background:var(--line);}
+  .flow-contract span{font-size:12.5px; font-weight:700; color:var(--coral); background:#FFF0EA; padding:8px 18px; border-radius:999px; white-space:nowrap;}
+
+  .pricing{background:var(--mist);}
+  .price-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; align-items:stretch;}
+  .price-card{background:var(--white); border:1px solid var(--line); border-radius:var(--radius); padding:28px 24px; display:flex; flex-direction:column; position:relative;}
+  .price-card.featured{background:linear-gradient(160deg, var(--sky), var(--mint)); color:var(--white); border-color:transparent; box-shadow:0 20px 40px -18px rgba(23,59,77,.35);}
+  .price-card.featured::before{content:"人気No.1"; position:absolute; top:-13px; left:22px; background:var(--white); color:var(--sky); font-size:11px; font-weight:700; padding:5px 14px; border-radius:999px; letter-spacing:.04em;}
+  .price-card.premium{background:linear-gradient(165deg, var(--navy), var(--navy2)); color:#EFE3C6; border-color:transparent; box-shadow:0 20px 44px -18px rgba(10,16,24,.5);}
+  .price-card.premium::before{content:"プレミアム"; position:absolute; top:-13px; left:22px; background:var(--gold); color:var(--navy); font-size:11px; font-weight:700; padding:5px 14px; border-radius:999px; letter-spacing:.06em; font-family:'Shippori Mincho B1',serif;}
+  .price-card.premium .price-tag{color:var(--gold);}
+  .price-card.premium .price-num{color:#fff;}
+  .price-card.premium .price-note{color:#B9C4D3;}
+  .price-tag{font-size:13px; letter-spacing:.06em; font-weight:700; opacity:.85;}
+  .price-num{font-family:'JetBrains Mono',monospace; font-weight:700; font-size:32px; margin:8px 0 2px;}
+  .price-num small{font-size:13px; font-weight:500;}
+  .price-note{font-size:12px; opacity:.75; margin-bottom:16px;}
+  .price-card ul{list-style:none; font-size:13px; display:flex; flex-direction:column; gap:8px; flex:1;}
+  .price-card ul li{padding-left:18px; position:relative;}
+  .price-card ul li::before{content:"○"; position:absolute; left:0; font-size:11px; top:2px; color:var(--mint);}
+  .price-card.featured ul li::before{content:"●"; color:#fff;}
+  .price-card.premium ul li::before{content:"◆"; color:var(--gold); font-size:9px; top:3px;}
+  .price-card.premium ul li.highlight{color:#fff; font-weight:700;}
+
+  .cta-final{background:linear-gradient(120deg, var(--mint) 0%, var(--sky) 100%); color:var(--white); text-align:center; padding:88px 0;}
+  .cta-final .eyebrow{justify-content:center; width:100%; color:#FFF7E6;}
+  .cta-final h2{font-size:clamp(22px,3.4vw,38px); font-weight:800; margin:16px auto 14px; max-width:none; white-space:nowrap;}
+  .cta-final p{color:#EAF7F2; max-width:46ch; margin:0 auto 30px; font-size:14.5px;}
+  .cta-final .hero-ctas{justify-content:center;}
+  .contact-note{margin-top:24px; font-size:12px; color:rgba(255,255,255,.75);}
+
+  footer{background:var(--ink); color:#9FB4BF; padding:26px 0; font-size:12px;}
+  .footer-inner{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;}
+
+  /* visual rhythm: give each chapter its own atmosphere */
+  section{position:relative; overflow:hidden; padding:104px 0;}
+  .section-head{position:relative; z-index:1; margin-bottom:42px;}
+  .section-head h2{font-size:clamp(26px,3.2vw,38px); letter-spacing:.025em; line-height:1.45;}
+  .section-head p{font-size:15px;}
+  .fit{background:#fff8f3;}
+  .fit::after{content:""; position:absolute; width:390px; height:390px; border:54px solid rgba(255,122,89,.10); border-radius:50%; right:-160px; top:-160px;}
+  .fit-grid{position:relative; z-index:1; display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  .fit-content-layout{display:grid; grid-template-columns:minmax(0,1fr) 250px; align-items:center; gap:22px; position:relative; z-index:1;}
+  .fit-side-visual{width:100%; max-height:310px; object-fit:contain; object-position:right center;}
+  .fit-card{height:100%; min-height:154px; flex-direction:row; align-items:center; gap:14px; border:2px dashed rgba(255,122,89,.52); border-radius:44% 56% 49% 51% / 42% 46% 54% 58%; padding:24px; box-shadow:none; transition:transform .2s ease, background .2s ease;}
+  .fit-card:nth-child(2){border-radius:56% 44% 58% 42% / 48% 57% 43% 52%;}
+  .fit-card:nth-child(3){border-radius:48% 52% 43% 57% / 58% 45% 55% 42%;}
+  .fit-card:hover{transform:translateY(-5px) rotate(-.25deg); background:#fff5ef;}
+  .fit-card .check{width:32px; height:32px; background:#fff0ea;}
+  .fit-card p{font-size:15px; line-height:1.8;}
+  .fit-card-illust{display:none;}
+  .fit-resolve{position:relative; z-index:1; background:var(--coral); color:#fff; max-width:580px; margin:42px auto 0; padding:14px 30px; border-radius:999px; box-shadow:0 14px 24px -18px rgba(255,122,89,.75);}
+
+  .why{background:var(--navy); color:#f4faf8;}
+  .why::before{content:"WHY REVUP"; position:absolute; right:-18px; top:-88px; color:rgba(255,255,255,.045); font-family:'JetBrains Mono',monospace; font-size:clamp(82px,15vw,210px); font-weight:700; letter-spacing:-.08em; white-space:nowrap;}
+  .why .section-head{max-width:700px;}
+  .why .section-head p{color:#b5c7cf;}
+  .why .num-list{display:grid; grid-template-columns:repeat(2,1fr); gap:18px; position:relative; z-index:1;}
+  .why .num-card{display:flex; flex-direction:row; align-items:center; gap:20px; min-height:190px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); border-radius:2px 22px 2px 22px; padding:26px; color:#fff; transition:background .2s ease, transform .2s ease;}
+  .why .num-card:hover{background:rgba(46,155,214,.24); transform:translateY(-4px);}
+  .why .num-card-content{flex:1;}
+  .why .num-card-content p{color:#c0d1d7; padding-right:0;}
+  .why .num-card-illust{width:60px; height:60px; margin:0; flex-shrink:0;}
+  .why .num-badge{background:var(--sun); color:var(--navy);}
+
+  .section-head.has-visual{max-width:none; min-height:142px; padding-right:255px;}
+  .section-visual{position:absolute; right:0; top:-10px; width:220px; max-height:150px; object-fit:contain; object-position:right center;}
+  .why .section-head.has-visual{padding-right:365px; min-height:190px;}
+  .why .section-visual.why-visual{width:350px; height:178px; max-height:none; object-fit:cover; object-position:center top;}
+  .benefits .section-visual{width:225px;}
+
+  .founder{background:#f1f7f8; padding:76px 0;}
+  .founder-card{max-width:920px; margin:auto; background:#fff; border:0; border-left:7px solid var(--sky); border-radius:0 22px 22px 0; box-shadow:0 22px 45px -32px rgba(23,59,77,.4);}
+  .founder-avatar{width:265px; height:auto; flex-shrink:0;}
+  .founder-avatar img{width:100%; height:auto;}
+  .founder-achievements{margin-top:18px; color:var(--sky); font-size:17px; font-weight:800; line-height:1.9;}
+
+  @media (min-width:861px){
+    .fit .section-head,.problem .section-head,.solution .section-head,.flow .section-head,.pricing .section-head{max-width:none;}
+    .fit .section-head h2,.problem .section-head h2,.solution .section-head h2,.flow .section-head h2,.pricing .section-head h2{white-space:nowrap; font-size:clamp(23px,2.45vw,34px); letter-spacing:0;}
+  }
+
+  .problem{background:#1d2632; color:#fff;}
+  .problem::after{content:"!"; position:absolute; font-family:'Shippori Mincho B1',serif; color:rgba(255,122,89,.15); font-size:520px; line-height:1; right:7%; bottom:-155px;}
+  .problem .section-head p{color:#bcc8cf;}
+  .problem .num-list{position:relative; z-index:1; display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1px solid rgba(255,255,255,.18);}
+  .problem .num-card{display:flex; flex-direction:row; align-items:center; gap:20px; min-height:260px; background:transparent; border:0; border-right:1px solid rgba(255,255,255,.18); border-radius:0; padding:28px 24px; color:#fff;}
+  .problem .num-card:last-child{border-right:0;}
+  .problem .num-card-content{flex:1;}
+  .problem .num-card-content p{color:#c1cbd0;}
+  .problem .num-card-illust{margin:0; flex-shrink:0;}
+  .problem .num-badge{background:var(--coral);}
+
+  .benefits{background:#e9f8f4;}
+  .benefits::before{content:"01  02  03"; position:absolute; top:24px; left:0; right:0; color:rgba(47,191,155,.11); text-align:center; font-family:'JetBrains Mono',monospace; font-size:clamp(56px,10vw,130px); font-weight:700; letter-spacing:.12em; white-space:nowrap;}
+  .benefits .num-list{position:relative; z-index:1; display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  .benefits .num-card{display:flex; flex-direction:row; align-items:center; gap:20px; min-height:260px; height:100%; border:0; border-radius:18px; padding:26px; box-shadow:0 18px 34px -28px rgba(19,77,66,.4);}
+  .benefits .num-card:nth-child(2){background:var(--mint); color:#fff;}
+  .benefits .num-card:nth-child(2) .num-card-content p{color:#e1fff6;}
+  .benefits .num-card:nth-child(2) .num-badge{background:#fff; color:var(--mint);}
+  .benefits .num-card-content{flex:1;}
+  .benefits .num-card-illust{margin:0; flex-shrink:0;}
+
+  .solution{background:#fff;}
+  .solution .section-head{display:block; max-width:620px;}
+  .solution .section-head h2{max-width:none;}
+  .solution .section-head p{max-width:46ch; padding-bottom:0;}
+  .feat-grid{gap:0; border-top:1px solid var(--line); border-left:1px solid var(--line);}
+  .feat-card{border-radius:0; box-shadow:none; border-right:1px solid var(--line); border-bottom:1px solid var(--line); padding:30px 24px; transition:background .2s ease;}
+  .feat-card:nth-child(even){background:#f3faf8;}
+  .feat-card:hover{background:#e6f7f2;}
+
+  .flow{background:#fff9e9;}
+  .flow .wrap{position:relative;}
+  .flow .section-head{margin-left:0; text-align:left;}
+  .flow-list{max-width:720px; margin-left:0; border-left:2px solid var(--sun); padding-left:34px;}
+  .flow-side-visual{position:absolute; right:0; bottom:8px; width:310px; max-height:330px; object-fit:contain; object-position:right bottom;}
+  .flow-item{grid-template-columns:92px 1fr; border-top:0; border-bottom:1px dashed #e6cc8a; transition:transform .2s ease;}
+  .flow-item:last-child{border-bottom:0;}
+  .flow-item:nth-of-type(3){margin-left:5%; width:95%;}
+  .flow-item:nth-of-type(4){margin-left:10%; width:90%;}
+  .flow-item:nth-of-type(5){margin-left:15%; width:85%;}
+  .flow-item:nth-of-type(6){margin-left:20%; width:80%;}
+  .flow-item:nth-of-type(n+3):hover{transform:translateX(6px);}
+  .flow-num{color:#d49316;}
+  .flow-contract::before,.flow-contract::after{background:#e6cc8a;}
+
+  .pricing{background:#edf5fb;}
+  .pricing::before{content:"PLAN"; position:absolute; top:-92px; left:4%; font:700 clamp(110px,19vw,270px)/1 'JetBrains Mono',monospace; color:rgba(46,155,214,.065); letter-spacing:-.12em;}
+  .pricing .section-head{position:relative;}
+  .price-grid{position:relative;}
+  .price-card{border-radius:20px; box-shadow:0 14px 30px -25px rgba(23,59,77,.36);}
+
+  .cta-final{background:var(--navy);}
+  .cta-final::before,.cta-final::after{content:""; position:absolute; border-radius:50%; border:1px solid rgba(255,255,255,.16); width:450px; height:450px;}
+  .cta-final::before{left:-270px; top:-170px;}.cta-final::after{right:-280px; bottom:-250px;}
+  .cta-final .wrap{position:relative; z-index:1;}
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+    .feat-grid{grid-template-columns:repeat(2,1fr);}
+    .price-grid{grid-template-columns:1fr;}
+    .fit-grid,.problem .num-list,.benefits .num-list{grid-template-columns:1fr;}
+    .fit-content-layout{grid-template-columns:1fr;}
+    .fit-side-visual{width:min(260px,70%); margin:0 0 0 auto; order:-1;}
+    .why .num-list{grid-template-columns:1fr;}
+    .problem .num-card{flex-direction:column; align-items:flex-start; min-height:0; border-right:0; border-bottom:1px solid rgba(255,255,255,.18);}
+    .problem .num-card:last-child{border-bottom:0;}
+    .benefits .num-card{flex-direction:column; align-items:flex-start;}
+    .benefits .num-card-illust,.problem .num-card-illust{align-self:flex-end;}
+    .benefits .num-card:nth-child(2){transform:none;}
+    .solution .section-head{display:block;}
+    .why .num-card{flex-direction:column; align-items:flex-start;}
+    .why .num-card-illust{align-self:flex-end;}
+    .section-head.has-visual{padding-right:0; min-height:0;}
+    .section-visual{position:static; display:block; width:190px !important; height:auto !important; max-height:150px; margin:12px 0 0 auto; object-fit:contain !important;}
+    .flow-list{max-width:none;}
+    .flow-side-visual{position:static; display:block; width:min(280px,72%); max-height:none; margin:24px 0 0 auto;}
+    .founder-avatar{width:220px;}
+  }
+  @media (max-width:560px){
+    .feat-grid{grid-template-columns:1fr;}
+    .flow-item{grid-template-columns:56px 1fr;}
+    .num-card{flex-direction:column; align-items:flex-start;}
+    .num-card-illust{align-self:flex-end; margin-top:-46px;}
+    .fit-card{flex-wrap:wrap;}
+    .cta-final h2{white-space:normal; font-size:clamp(21px,7vw,28px);}
+    .flow-item:nth-of-type(n+3){margin-left:0; width:100%;}
+  }
+  @media (prefers-reduced-motion: reduce){ *{animation-duration:.001ms !important; transition-duration:.001ms !important;} }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="logo">REVUP<span>/レブアップ</span></div>
+    <a href="#contact" class="nav-cta">無料アドバイスを受ける</a>
+  </div>
+</header>
+
+<section class="hero">
+  <svg class="clouds" viewBox="0 0 1200 600" preserveAspectRatio="none" aria-hidden="true">
+    <ellipse cx="180" cy="90" rx="120" ry="34" fill="rgba(255,255,255,0.18)"/>
+    <ellipse cx="950" cy="60" rx="160" ry="40" fill="rgba(255,255,255,0.14)"/>
+    <ellipse cx="600" cy="180" rx="220" ry="46" fill="rgba(255,255,255,0.10)"/>
+    <ellipse cx="80" cy="320" rx="140" ry="34" fill="rgba(255,255,255,0.10)"/>
+  </svg>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow" style="color:#FFF7E6">Googleマップ口コミ対策 REVUP</span>
+      <h1 class="mincho">口コミの数だけ、<em>新しいお客様</em>に出会える。</h1>
+      <p class="lead">地域の店舗に寄り添う、口コミ対策の伴走パートナー。返信のサポートから分析、レポートまで、まるごとおまかせいただけます。</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn-primary btn">まずは無料アドバイスから</a>
+        <a href="#pricing" class="btn-ghost btn">料金プランを見る</a>
+      </div>
+    </div>
+    <div class="map-card">
+      <div class="map-card-top">
+        <div class="pin"></div>
+        <div>
+          <div class="map-card-title">〇〇整体院 恵比寿店</div>
+          <div class="map-card-sub">Googleビジネスプロフィール</div>
+        </div>
+      </div>
+      <div class="rating-row">
+        <span class="rating-num" id="ratingNum">3.2</span>
+        <span class="stars" id="starRow"></span>
+      </div>
+      <div class="rating-count" id="reviewCount">口コミ 42件</div>
+      <div class="kpi-row">
+        <div class="kpi"><div class="num" id="kpiRank">圏外</div><div class="label">MEO順位</div></div>
+        <div class="kpi"><div class="num" id="kpiReply">18%</div><div class="label">返信率</div></div>
+        <div class="kpi"><div class="num" id="kpiMonth">—</div><div class="label">今月の新規口コミ</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="wave-divider"><svg viewBox="0 0 1200 90" preserveAspectRatio="none"><path d="M0,40 C300,90 900,0 1200,50 L1200,90 L0,90 Z" fill="#F6FBFA"/></svg></div>
+</section>
+
+<section class="fit">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" style="color:var(--coral)">こんな方には特にお勧めです</span>
+      <h2 class="mincho">その悩み、REVUPが向いているかもしれません。</h2>
+    </div>
+    <div class="fit-content-layout">
+      <div class="fit-grid">
+        <div class="fit-card">
+          <div class="check">✓</div>
+          <p>高い評価はもらえるけど、口コミ件数が少ない…</p>
+        </div>
+        <div class="fit-card">
+          <div class="check">✓</div>
+          <p>仕事が忙しくて、口コミへの対応まで手が回らない</p>
+        </div>
+        <div class="fit-card">
+          <div class="check">✓</div>
+          <p>口コミ対策の話は聞いたことがあるけど、費用が高くて踏み出せなかった</p>
+        </div>
+      </div>
+      <img class="fit-side-visual" src="assets/nayami.png" alt="口コミ対策に悩む店舗オーナー">
+    </div>
+    <p class="fit-resolve">その悩み、REVUPなら解決できます！</p>
+  </div>
+</section>
+
+<section class="why">
+  <div class="wrap">
+    <div class="section-head has-visual">
+      <span class="eyebrow">REVUPが選ばれる理由</span>
+      <h2 class="mincho">大手にはできない、価格とサポート。</h2>
+      <img class="section-visual why-visual" src="assets/omakase.png" alt="REVUPのサポート担当者">
+    </div>
+    <div class="num-list">
+      <div class="num-card">
+        <div class="num-card-content">
+          <div class="num-card-head"><span class="num-badge mono">01</span><h3>地域密着型のサポート</h3></div>
+          <p>店舗ごとの状況に合わせ、一つひとつ丁寧に対応します。</p>
+        </div>
+        <div class="num-card-illust"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#EAF6F2"/><circle cx="50" cy="38" r="16" fill="#F7D7B8"/><path d="M28 88 Q28 60 50 60 Q72 60 72 88 Z" fill="#2E9BD6"/><circle cx="44" cy="36" r="2.5" fill="#173B4D"/><circle cx="56" cy="36" r="2.5" fill="#173B4D"/><path d="M43 44 Q50 49 57 44" stroke="#173B4D" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M72 30 C72 26 76 24 79 27 C82 24 86 26 86 30 C86 35 79 40 79 40 C79 40 72 35 72 30 Z" fill="#FF7A59"/></svg></div>
+      </div>
+      <div class="num-card">
+        <div class="num-card-content">
+          <div class="num-card-head"><span class="num-badge mono">02</span><h3>わかりやすい料金設計</h3></div>
+          <p>複雑な契約や高額な初期費用は不要です。</p>
+        </div>
+        <div class="num-card-illust"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#FFF4DE"/><circle cx="42" cy="58" r="22" fill="#FFC24B" stroke="#E7A33E" stroke-width="2"/><text x="42" y="65" font-family="'JetBrains Mono', monospace" font-size="20" font-weight="700" fill="#8A5A12" text-anchor="middle">¥</text><circle cx="66" cy="38" r="16" fill="#FFD98A" stroke="#E7A33E" stroke-width="2"/></svg></div>
+      </div>
+      <div class="num-card">
+        <div class="num-card-content">
+          <div class="num-card-head"><span class="num-badge mono">03</span><h3>地域活性化という理念</h3></div>
+          <p>一店舗ではなく、地域全体の元気を目指しています。</p>
+        </div>
+        <div class="num-card-illust"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#EAF6F2"/><path d="M30 60 L50 42 L70 60 V82 H30 Z" fill="#2FBF9B"/><rect x="44" y="66" width="12" height="16" fill="#F6FBFA"/><path d="M50 30 C50 26 54 24 57 27 C60 24 64 26 64 30 C64 35 57 40 57 40 C57 40 50 35 50 30 Z" fill="#FF7A59"/></svg></div>
+      </div>
+      <div class="num-card">
+        <div class="num-card-content">
+          <div class="num-card-head"><span class="num-badge mono">04</span><h3>まずは無料アドバイスから</h3></div>
+          <p>契約前に、口コミ状況を無料で診断します。</p>
+        </div>
+        <div class="num-card-illust"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#E7F5FC"/><rect x="20" y="30" width="60" height="38" rx="12" fill="#2E9BD6"/><path d="M34 68 L34 80 L48 68 Z" fill="#2E9BD6"/><text x="50" y="54" font-family="'Zen Kaku Gothic New', sans-serif" font-size="16" font-weight="900" fill="#fff" text-anchor="middle">無料</text></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="founder">
+  <div class="wrap">
+    <div class="founder-card">
+      <div class="founder-avatar"><img src="assets/daihyou.png" alt="マーケティング施策を提案するREVUP代表"></div>
+      <div class="founder-content">
+        <p class="founder-quote">貴店の口コミアップの為に、代表が監修したマーケティング施策を提案します。</p>
+        <div class="founder-achievements">
+          マーケティング歴14年<br>
+          上場企業含む複数社で0→1立ち上げ実績<br>
+          今も第一線で毎年150～170％の目標達成を継続中
+        </div>
+        <div class="founder-name">REVUP代表</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="problem">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" style="color:var(--coral)">こんなお悩みありませんか</span>
+      <h2 class="mincho">口コミは、放っておくと"負債"になる。</h2>
+    </div>
+    <div class="num-list">
+      <div class="num-card">
+        <div class="num-card-content">
+          <div class="num-card-head"><span class="num-badge mono">01</span><h3>返信が後回しになる</h3></div>
+          <p>未返信の口コミが、悪い印象のまま残ってしまう。</p>
+        </div>
+        <div class="num-card-illust"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#FFF0EA"/><circle cx="50" cy="48" r="22" fill="#fff" stroke="#FF7A59" stroke-width="4"/><line x1="50" y1="48" x2="50" y2="34" stroke="#173B4D" stroke-width="3" stroke-linecap="round"/><line x1="50" y1="48" x2="60" y2="52" stroke="#173B4D" stroke-width="3" stroke-linecap="round"/><path d="M70 74 Q76 66 70 60" stroke="#FF7A59" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="73" cy="58" r="3" fill="#FF7A59"/></svg></div>
+      </div>
+      <div class="num-card">
+        <div class="num-card-content">
+          <div class="num-card-head"><span class="num-badge mono">02</span><h3>星3台前後で埋もれる</h3></div>
+          <p>評価の低さで、来店の選択肢から外れてしまう。</p>
+        </div>
+        <div class="num-card-illust"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#FFF8E8"/><polygon points="50,20 58,40 80,42 63,56 69,78 50,66 31,78 37,56 20,42 42,40" fill="#FFC24B"/><polygon points="20,68 23,74 30,75 25,80 26,87 20,83 14,87 15,80 10,75 17,74" fill="#F0E4C8"/></svg></div>
+      </div>
+      <div class="num-card">
+        <div class="num-card-content">
+          <div class="num-card-head"><span class="num-badge mono">03</span><h3>効果が見えない</h3></div>
+          <p>対策をしても、成果を実感しづらい。</p>
+        </div>
+        <div class="num-card-illust"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#EAF6F2"/><polyline points="24,70 40,55 52,62 76,32" stroke="#2FBF9B" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="76" cy="32" r="4" fill="#2FBF9B"/><text x="60" y="82" font-family="'JetBrains Mono', monospace" font-size="22" font-weight="700" fill="#FF7A59">?</text></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="benefits">
+  <div class="wrap">
+    <div class="section-head has-visual">
+      <span class="eyebrow">REVUPが届ける3つの価値</span>
+      <h2 class="mincho">"埋もれる店"から"選ばれる店"へ。</h2>
+      <img class="section-visual" src="assets/okyaku.png" alt="店舗を選ぶさまざまなお客様">
+    </div>
+    <div class="num-list">
+      <div class="num-card">
+        <div class="num-card-content">
+          <div class="num-card-head"><span class="num-badge mono">01</span><h3>口コミが増え、新規のお客様が増える</h3></div>
+          <p>継続的な口コミ獲得で、新規来店の増加を目指せます。</p>
+        </div>
+        <div class="num-card-illust"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#E7F5FC"/><rect x="26" y="58" width="12" height="24" fill="#6FC1E8"/><rect x="44" y="46" width="12" height="36" fill="#2E9BD6"/><rect x="62" y="32" width="12" height="50" fill="#2FBF9B"/><polygon points="68,20 71,27 78,28 72,33 74,40 68,36 62,40 64,33 58,28 65,27" fill="#FFC24B"/></svg></div>
+      </div>
+      <div class="num-card">
+        <div class="num-card-content">
+          <div class="num-card-head"><span class="num-badge mono">02</span><h3>導入しやすい価格設定</h3></div>
+          <p>明確な料金設計で、無理なく始められます。</p>
+        </div>
+        <div class="num-card-illust"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#FFF4DE"/><circle cx="50" cy="52" r="26" fill="#FFC24B" stroke="#E7A33E" stroke-width="2"/><circle cx="42" cy="46" r="2.5" fill="#8A5A12"/><circle cx="58" cy="46" r="2.5" fill="#8A5A12"/><path d="M40 58 Q50 66 60 58" stroke="#8A5A12" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="num-card">
+        <div class="num-card-content">
+          <div class="num-card-head"><span class="num-badge mono">03</span><h3>効果を体感しやすいレポート</h3></div>
+          <p>毎月の変化がひと目で分かります。</p>
+        </div>
+        <div class="num-card-illust"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#EAF6F2"/><rect x="30" y="22" width="40" height="56" rx="6" fill="#fff" stroke="#2FBF9B" stroke-width="3"/><rect x="38" y="16" width="24" height="12" rx="4" fill="#2FBF9B"/><line x1="38" y1="42" x2="62" y2="42" stroke="#DCEAE7" stroke-width="3"/><line x1="38" y1="52" x2="56" y2="52" stroke="#DCEAE7" stroke-width="3"/><path d="M38 64 L46 72 L64 56" stroke="#FF7A59" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="solution">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" style="color:var(--sky)">REVUPができること</span>
+      <h2 class="mincho">口コミ対応を、まるごと仕組み化。</h2>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V6a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg></div><h3>口コミ返信サポート</h3><p>内容にあわせた返信文の作成をサポートします。</p></div>
+      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 9l-5 5-4-4-4 4"/></svg></div><h3>MEO順位トラッキング</h3><p>主要キーワードでのマップ検索順位を計測します。</p></div>
+      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h1v1H9zM14 9h1v1h-1zM9 14h1v1H9zM14 14h1v1h-1z"/></svg></div><h3>口コミ数の増加</h3><p>QRカードや様々な施策で口コミ投稿を後押しします。</p></div>
+      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 19h16M7 15v4M12 9v10M17 5v14"/></svg></div><h3>月次成果レポート</h3><p>星評価・順位・反響の推移を毎月お届けします。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="flow">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" style="color:var(--sun)">導入の流れ</span>
+      <h2 class="mincho">まずは無料アドバイスから、お気軽に。</h2>
+    </div>
+    <div class="flow-list">
+      <div class="flow-item">
+        <div class="flow-num free">無料</div>
+        <div><h3>まずは無料アドバイスから</h3><p>現在の口コミ状況を無料で診断し、課題をヒアリングします。ご納得いただいてから、ご契約に進みます。</p></div>
+      </div>
+      <div class="flow-contract"><span>ここでご契約</span></div>
+      <div class="flow-item">
+        <div class="flow-num">1</div>
+        <div><h3>QRコード設置、初期戦略のご案内</h3><p>店頭に置くQRカードをお届けし、店舗に合わせた初期の進め方をご案内します。</p></div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-num">2</div>
+        <div><h3>口コミ収集スタート</h3><p>来店客からの新しい口コミが自然に集まり始めます。</p></div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-num">3</div>
+        <div><h3>返信文のご提案・傾向分析</h3><p>寄せられた口コミに返信文をご提案し、傾向を分析します。</p></div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-num">4</div>
+        <div><h3>月次レポートで成果を確認</h3><p>星評価・順位・反響の推移を、毎月ご確認いただけます。</p></div>
+      </div>
+    </div>
+    <img class="flow-side-visual" src="assets/advice.png" alt="無料アドバイスを行う担当者">
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" style="color:var(--sky)">料金プラン</span>
+      <h2 class="mincho">店舗の規模に合わせて選べる3プラン。</h2>
+      <p>まずはトライアルから、無理なくお試しいただけます。</p>
+    </div>
+    <div class="price-grid">
+      <div class="price-card">
+        <div class="price-tag">トライアル</div>
+        <div class="price-num mono">¥9,800<small> / 3ヶ月</small></div>
+        <div class="price-note">期間終了後、自動的に本契約へ移行します</div>
+        <ul>
+          <li>口コミ返信サポート</li>
+          <li>MEO順位トラッキング</li>
+          <li>QRカード1枚</li>
+        </ul>
+      </div>
+      <div class="price-card featured">
+        <div class="price-tag">スタンダード</div>
+        <div class="price-num mono">¥19,800<small> / 月</small></div>
+        <div class="price-note">最も選ばれているプラン</div>
+        <ul>
+          <li>口コミ返信サポート・傾向分析</li>
+          <li>MEO順位トラッキング</li>
+          <li>QRカード設置サポート</li>
+          <li>月次成果レポート</li>
+          <li>チャットサポート</li>
+        </ul>
+      </div>
+      <div class="price-card premium">
+        <div class="price-tag">プレミアム</div>
+        <div class="price-num mono">¥49,800<small> / 月</small></div>
+        <div class="price-note">コンサルティング費（¥10,000）込み</div>
+        <ul>
+          <li>スタンダードの全機能</li>
+          <li class="highlight">地域内での貴店の立ち位置分析</li>
+          <li class="highlight">今後のマーケティング戦略のご提案</li>
+          <li>専任担当による月次コンサルティング</li>
+          <li>複数店舗管理オプション</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final" id="contact">
+  <div class="wrap">
+    <span class="eyebrow">まずは無料アドバイスから</span>
+    <h2 class="mincho">まずは、担当から無料のアドバイスを。</h2>
+    <p>口コミの状況を無料で診断し、店舗に合った進め方をご提案します。ご契約は、ご納得いただいてからで大丈夫です。</p>
+    <div class="hero-ctas">
+      <a href="mailto:shimazu@synnergys.com" class="btn-primary btn">無料アドバイスを受ける</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div>運営：私産のミカタ｜REVUP（レブアップ）</div>
+    <div>&copy; 2026 REVUP</div>
+  </div>
+</footer>
+
+<script>
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const starRow = document.getElementById('starRow');
+  const ratingNum = document.getElementById('ratingNum');
+  const reviewCount = document.getElementById('reviewCount');
+  const kpiRank = document.getElementById('kpiRank');
+  const kpiReply = document.getElementById('kpiReply');
+  const kpiMonth = document.getElementById('kpiMonth');
+
+  function starSVG(fill){ return '<svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9.5 16.5,14.5 18.5,22 12,17.5 5.5,22 7.5,14.5 2,9.5 9,9" fill="'+fill+'" stroke="'+fill+'"/></svg>'; }
+  function renderStars(rating){
+    let html = '';
+    for(let i=1;i<=5;i++){ html += starSVG(i <= Math.round(rating) ? '#FFC24B' : '#E4E9E8'); }
+    starRow.innerHTML = html;
+  }
+  renderStars(3.2);
+
+  function animateSequence(){
+    const steps = [
+      {rating:3.2, count:42, rank:'圏外', reply:'18%', month:'—'},
+      {rating:3.9, count:68, rank:'9位', reply:'54%', month:'+11件'},
+      {rating:4.4, count:97, rank:'5位', reply:'88%', month:'+19件'},
+      {rating:4.8, count:128,rank:'3位', reply:'100%',month:'+24件'},
+    ];
+    let i = 0;
+    function step(){
+      const s = steps[i];
+      ratingNum.textContent = s.rating.toFixed(1);
+      renderStars(s.rating);
+      reviewCount.textContent = '口コミ ' + s.count + '件';
+      kpiRank.textContent = s.rank;
+      kpiReply.textContent = s.reply;
+      kpiMonth.textContent = s.month;
+      i++;
+      if(i < steps.length){
+        setTimeout(step, 1100);
+      } else {
+        setTimeout(animateSequence, 3000);
+      }
+    }
+    step();
+  }
+
+  if(prefersReduced){
+    ratingNum.textContent = '4.8'; renderStars(4.8);
+    reviewCount.textContent = '口コミ 128件';
+    kpiRank.textContent = '3位'; kpiReply.textContent = '100%'; kpiMonth.textContent = '+24件';
+  } else {
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ animateSequence(); obs.disconnect(); } });
+    }, {threshold:.4});
+    obs.observe(document.querySelector('.map-card'));
+  }
+</script>
+
+</body>
+</html>
