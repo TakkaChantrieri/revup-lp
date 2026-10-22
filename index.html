@@ -128,8 +128,8 @@
   .flow-item{display:grid; grid-template-columns:88px 1fr; gap:20px; padding:22px 0; border-top:1px solid var(--line);}
   .flow-num{font-family:'JetBrains Mono',monospace; font-weight:700; font-size:24px; color:var(--sky); opacity:.9;}
   .flow-num.free{font-family:'Zen Kaku Gothic New',sans-serif; font-size:13px; font-weight:700; color:var(--navy); background:var(--sun); border-radius:999px; padding:6px 4px; text-align:center; width:56px;}
-  .flow-item h3{font-size:15.5px; font-weight:700; margin-bottom:4px;}
-  .flow-item p{font-size:13px; color:var(--sub); max-width:58ch;}
+  .flow-item h3{font-size:18px; font-weight:700; margin-bottom:6px;}
+  .flow-item p{font-size:15px; color:var(--sub); max-width:58ch;}
   .flow-contract{display:flex; align-items:center; gap:14px; padding:16px 0;}
   .flow-contract::before, .flow-contract::after{content:""; flex:1; height:1px; background:var(--line);}
   .flow-contract span{font-size:12.5px; font-weight:700; color:var(--coral); background:#FFF0EA; padding:8px 18px; border-radius:999px; white-space:nowrap;}
@@ -196,6 +196,17 @@
   .why .num-card-illust{width:60px; height:60px; margin:0; flex-shrink:0;}
   .why .num-badge{background:var(--sun); color:var(--navy);}
 
+  .ai-era{background:#f5f9fc;}
+  .ai-era .section-head{max-width:760px;}
+  .ai-era-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; position:relative;}
+  .ai-era-card{min-height:265px; border:1px solid #d9e4ea; border-radius:16px; padding:28px 24px; background:#fff; box-shadow:0 14px 30px -26px rgba(23,59,77,.32);}
+  .ai-era-card.focus{background:#fff5d9; border:2px solid #efb43b;}
+  .ai-era-label{display:inline-block; padding:4px 12px; border-radius:999px; background:var(--sky); color:#fff; font-size:12px; font-weight:700; margin-bottom:18px;}
+  .ai-era-card.focus .ai-era-label{background:var(--sun); color:var(--navy);}
+  .ai-era-card.done .ai-era-label{background:var(--mint);}
+  .ai-era-card h3{font-size:18px; line-height:1.55; margin-bottom:18px;}
+  .ai-era-card p{font-size:13px; color:var(--sub);}
+
   .section-head.has-visual{max-width:none; min-height:142px; padding-right:255px;}
   .section-visual{position:absolute; right:0; top:-10px; width:220px; max-height:150px; object-fit:contain; object-position:right center;}
   .why .section-head.has-visual{padding-right:365px; min-height:190px;}
@@ -242,6 +253,9 @@
   .feat-card{border-radius:0; box-shadow:none; border-right:1px solid var(--line); border-bottom:1px solid var(--line); padding:30px 24px; transition:background .2s ease;}
   .feat-card:nth-child(even){background:#f3faf8;}
   .feat-card:hover{background:#e6f7f2;}
+  .solution .feat-grid{grid-template-columns:repeat(3,1fr);}
+  .feat-card.premium-feature{background:#f6effb;}
+  .premium-feature .feat-icon{background:linear-gradient(135deg, #a46bd3, #6f55c7);}
 
   .flow{background:#fff9e9;}
   .flow .wrap{position:relative;}
@@ -255,7 +269,7 @@
   .flow-item:nth-of-type(5){margin-left:15%; width:85%;}
   .flow-item:nth-of-type(6){margin-left:20%; width:80%;}
   .flow-item:nth-of-type(n+3):hover{transform:translateX(6px);}
-  .flow-num{color:#d49316;}
+  .flow-num{color:#d49316; font-size:28px;}
   .flow-contract::before,.flow-contract::after{background:#e6cc8a;}
 
   .pricing{background:#edf5fb;}
@@ -263,6 +277,31 @@
   .pricing .section-head{position:relative;}
   .price-grid{position:relative;}
   .price-card{border-radius:20px; box-shadow:0 14px 30px -25px rgba(23,59,77,.36);}
+  .plan-compare-wrap{position:relative; overflow-x:auto; border:1px solid #cbdce7; border-radius:18px; background:#fff; box-shadow:0 18px 34px -26px rgba(23,59,77,.28);}
+  .plan-compare{width:100%; min-width:720px; border-collapse:collapse; text-align:left;}
+  .plan-compare th,.plan-compare td{padding:14px 18px; border-bottom:1px solid #dbe6ec; vertical-align:middle; font-size:14px; line-height:1.5;}
+  .plan-compare thead th{background:var(--navy); color:#fff; font-size:15px; letter-spacing:.04em; white-space:nowrap;}
+  .plan-compare thead th:first-child{width:22%; border-radius:17px 0 0 0;}
+  .plan-compare thead th:last-child{border-radius:0 17px 0 0;}
+  .plan-compare tbody th{color:var(--ink); font-size:14px; font-weight:800; background:#f7fbfd; white-space:nowrap;}
+  .plan-compare tbody tr:last-child th,.plan-compare tbody tr:last-child td{border-bottom:0;}
+  .plan-compare .price{font-family:'JetBrains Mono',monospace; font-size:20px; font-weight:700; color:var(--sky);}
+  .plan-compare .standard{background:#f0faf7;}
+  .plan-compare .premium{background:#f8f5eb;}
+  .plan-compare thead .standard{background:var(--mint);}
+  .plan-compare thead .premium{background:var(--navy2); color:#ffe4a0;}
+  .plan-compare .yes{color:#149b6c; font-weight:800;}
+  .plan-compare .no{color:#8296a0; font-weight:700;}
+  .plan-compare .note{font-size:12px; color:var(--sub);}
+  .plan-compare caption{caption-side:bottom; padding:12px 18px; color:var(--sub); text-align:left; font-size:12px;}
+  .plan-recommendations{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:22px; position:relative;}
+  .plan-recommendation{border-top:4px solid var(--sky); padding:18px 20px; background:rgba(255,255,255,.76); border-radius:0 0 14px 14px;}
+  .plan-recommendation.standard{border-top-color:var(--mint); background:#edfaf6;}
+  .plan-recommendation.premium{border-top-color:var(--sun); background:#fff9e9;}
+  .plan-recommendation .recommend-label{display:block; margin-bottom:10px; font-size:13px; font-weight:800; color:var(--sky);}
+  .plan-recommendation.standard .recommend-label{color:#11856d;}
+  .plan-recommendation.premium .recommend-label{color:#a67417;}
+  .plan-recommendation p{font-size:13px; color:var(--sub); line-height:1.8;}
 
   .cta-final{background:var(--navy);}
   .cta-final::before,.cta-final::after{content:""; position:absolute; border-radius:50%; border:1px solid rgba(255,255,255,.16); width:450px; height:450px;}
@@ -273,7 +312,11 @@
     .hero-grid{grid-template-columns:1fr;}
     .feat-grid{grid-template-columns:repeat(2,1fr);}
     .price-grid{grid-template-columns:1fr;}
+    .plan-compare-wrap{border-radius:14px;}
+    .plan-recommendations{grid-template-columns:1fr;}
     .fit-grid,.problem .num-list,.benefits .num-list{grid-template-columns:1fr;}
+    .ai-era-grid{grid-template-columns:1fr;}
+    .solution .feat-grid{grid-template-columns:repeat(2,1fr);}
     .fit-content-layout{grid-template-columns:1fr;}
     .fit-side-visual{width:min(260px,70%); margin:0 0 0 auto; order:-1;}
     .why .num-list{grid-template-columns:1fr;}
@@ -292,7 +335,7 @@
     .founder-avatar{width:220px;}
   }
   @media (max-width:560px){
-    .feat-grid{grid-template-columns:1fr;}
+    .feat-grid,.solution .feat-grid{grid-template-columns:1fr;}
     .flow-item{grid-template-columns:56px 1fr;}
     .num-card{flex-direction:column; align-items:flex-start;}
     .num-card-illust{align-self:flex-end; margin-top:-46px;}
@@ -323,7 +366,7 @@
     <div>
       <span class="eyebrow" style="color:#FFF7E6">Googleマップ口コミ対策 REVUP</span>
       <h1 class="mincho">口コミの数だけ、<em>新しいお客様</em>に出会える。</h1>
-      <p class="lead">地域の店舗に寄り添う、口コミ対策の伴走パートナー。返信のサポートから分析、レポートまで、これからのAI検索時代も見据えてまるごとおまかせいただけます。</p>
+      <p class="lead">地域の店舗に寄り添う、口コミ対策の伴走パートナー。返信のサポートから分析、レポートまで、まるごとおまかせいただけます。</p>
       <div class="hero-ctas">
         <a href="#contact" class="btn-primary btn">まずは無料アドバイスから</a>
         <a href="#pricing" class="btn-ghost btn">料金プランを見る</a>
@@ -372,18 +415,37 @@
           <div class="check">✓</div>
           <p>口コミ対策の話は聞いたことがあるけど、費用が高くて踏み出せなかった</p>
         </div>
-        <div class="fit-card">
-          <div class="check">✓</div>
-          <p>AIとかAEOとか言われても正直よくわからないけど、対策しないといけない気がしている</p>
-        </div>
-        <div class="fit-card">
-          <div class="check">✓</div>
-          <p>ChatGPT等のAI検索で自分のお店を紹介してもらいたい</p>
-        </div>
       </div>
       <img class="fit-side-visual" src="assets/nayami.png" alt="口コミ対策に悩む店舗オーナー">
     </div>
     <p class="fit-resolve">その悩み、REVUPなら解決できます！</p>
+  </div>
+</section>
+
+<section class="ai-era">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" style="color:var(--sky)">検索の変化</span>
+      <h2 class="mincho">AIでお店が選ばれる時代が来た。</h2>
+      <p>Google検索からAI検索へ。口コミは、これからの「AI推薦」にもつながる大切な評価情報です。</p>
+    </div>
+    <div class="ai-era-grid">
+      <article class="ai-era-card">
+        <span class="ai-era-label">従来型</span>
+        <h3>これまで<br>SEO／MEO時代</h3>
+        <p>Googleマップや検索結果に表示され、ユーザー自身がお店を選ぶ時代。口コミは比較の材料でした。</p>
+      </article>
+      <article class="ai-era-card focus">
+        <span class="ai-era-label">注目</span>
+        <h3>これから<br>AIO／AEO時代</h3>
+        <p>ChatGPTやGeminiなどのAIが直接推薦し、ユーザーはAIの回答を参考に行動します。口コミはAI選定基準にも直結します。</p>
+      </article>
+      <article class="ai-era-card done">
+        <span class="ai-era-label">対応済み</span>
+        <h3>REVUPが<br>対応する世界</h3>
+        <p>口コミ件数・評価・返信実績を積み上げ、MEOからAIO／AEOまで一括で支援します。</p>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -397,29 +459,29 @@
     <div class="num-list">
       <div class="num-card">
         <div class="num-card-content">
-          <div class="num-card-head"><span class="num-badge mono">01</span><h3>地域密着型のサポート</h3></div>
-          <p>店舗ごとの状況に合わせ、一つひとつ丁寧に対応します。</p>
+          <div class="num-card-head"><span class="num-badge mono">01</span><h3>GoogleマップからAI検索まで対応</h3></div>
+          <p>口コミ・GBP対策を通じて、MEOからAIO／AEOまで支援します。</p>
         </div>
         <div class="num-card-illust"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#EAF6F2"/><circle cx="50" cy="38" r="16" fill="#F7D7B8"/><path d="M28 88 Q28 60 50 60 Q72 60 72 88 Z" fill="#2E9BD6"/><circle cx="44" cy="36" r="2.5" fill="#173B4D"/><circle cx="56" cy="36" r="2.5" fill="#173B4D"/><path d="M43 44 Q50 49 57 44" stroke="#173B4D" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M72 30 C72 26 76 24 79 27 C82 24 86 26 86 30 C86 35 79 40 79 40 C79 40 72 35 72 30 Z" fill="#FF7A59"/></svg></div>
       </div>
       <div class="num-card">
         <div class="num-card-content">
-          <div class="num-card-head"><span class="num-badge mono">02</span><h3>わかりやすい料金設計</h3></div>
-          <p>複雑な契約や高額な初期費用は不要です。</p>
+          <div class="num-card-head"><span class="num-badge mono">02</span><h3>最安 ¥9,800／月から</h3></div>
+          <p>導入しやすい料金設計で、高額な初期費用はかかりません。</p>
         </div>
         <div class="num-card-illust"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#FFF4DE"/><circle cx="42" cy="58" r="22" fill="#FFC24B" stroke="#E7A33E" stroke-width="2"/><text x="42" y="65" font-family="'JetBrains Mono', monospace" font-size="20" font-weight="700" fill="#8A5A12" text-anchor="middle">¥</text><circle cx="66" cy="38" r="16" fill="#FFD98A" stroke="#E7A33E" stroke-width="2"/></svg></div>
       </div>
       <div class="num-card">
         <div class="num-card-content">
-          <div class="num-card-head"><span class="num-badge mono">03</span><h3>地域活性化という理念</h3></div>
-          <p>一店舗ではなく、地域全体の元気を目指しています。</p>
+          <div class="num-card-head"><span class="num-badge mono">03</span><h3>最短3ヶ月から開始</h3></div>
+          <p>長期契約に縛られず、店舗の状況に合わせて始められます。</p>
         </div>
         <div class="num-card-illust"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#EAF6F2"/><path d="M30 60 L50 42 L70 60 V82 H30 Z" fill="#2FBF9B"/><rect x="44" y="66" width="12" height="16" fill="#F6FBFA"/><path d="M50 30 C50 26 54 24 57 27 C60 24 64 26 64 30 C64 35 57 40 57 40 C57 40 50 35 50 30 Z" fill="#FF7A59"/></svg></div>
       </div>
       <div class="num-card">
         <div class="num-card-content">
-          <div class="num-card-head"><span class="num-badge mono">04</span><h3>まずは無料アドバイスから</h3></div>
-          <p>契約前に、口コミ状況を無料で診断します。</p>
+          <div class="num-card-head"><span class="num-badge mono">04</span><h3>4ヶ月目から自動移行</h3></div>
+          <p>ライトプランは、継続しやすいスタンダードプランへ自動移行します。</p>
         </div>
         <div class="num-card-illust"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#E7F5FC"/><rect x="20" y="30" width="60" height="38" rx="12" fill="#2E9BD6"/><path d="M34 68 L34 80 L48 68 Z" fill="#2E9BD6"/><text x="50" y="54" font-family="'Zen Kaku Gothic New', sans-serif" font-size="16" font-weight="900" fill="#fff" text-anchor="middle">無料</text></svg></div>
       </div>
@@ -480,8 +542,7 @@
   <div class="wrap">
     <div class="section-head has-visual">
       <span class="eyebrow">REVUPが届ける3つの価値</span>
-      <h2 class="mincho">AIが"おすすめ"として紹介する、"選ばれる店"へ。</h2>
-      <p>ChatGPTやGoogleのAIが「おすすめのお店」を答える時代。質の高い口コミと返信実績の積み重ねが、AIに紹介される理由になります。</p>
+      <h2 class="mincho">"埋もれる店"から"選ばれる店"へ。</h2>
       <img class="section-visual" src="assets/okyaku.png" alt="店舗を選ぶさまざまなお客様">
     </div>
     <div class="num-list">
@@ -514,14 +575,15 @@
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow" style="color:var(--sky)">REVUPができること</span>
-      <h2 class="mincho">AI検索時代に選ばれるお店になるための仕組み化。</h2>
-      <p>返信文の作成から分析、戦略立案まで、専門ノウハウでまるごとサポートします。</p>
+      <h2 class="mincho">口コミ対応を、まるごと仕組み化。</h2>
     </div>
     <div class="feat-grid">
-      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V6a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg></div><h3>口コミ返信サポート</h3><p>専門知識を活かし、内容にあわせた返信文の作成をサポートします。</p></div>
-      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 9l-5 5-4-4-4 4"/></svg></div><h3>MEO順位トラッキング</h3><p>主要キーワードでのマップ検索順位を計測し、AI検索でも見つかりやすい状態を目指します。</p></div>
-      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h1v1H9zM14 9h1v1h-1zM9 14h1v1H9zM14 14h1v1h-1z"/></svg></div><h3>口コミ数の増加</h3><p>QRカードや様々な施策で口コミ投稿を後押しします。</p></div>
-      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 19h16M7 15v4M12 9v10M17 5v14"/></svg></div><h3>月次成果レポート</h3><p>星評価・順位・反響の推移を毎月お届けします。</p></div>
+      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V6a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg></div><h3>口コミ返信代行</h3><p>返信文を作成して代行投稿。店舗の負担を抑えながら、迅速な対応を続けます。</p></div>
+      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 9l-5 5-4-4-4 4"/></svg></div><h3>月次分析レポート</h3><p>評価・件数の推移を見える化。現在地を把握し、次の対策へつなげます。</p></div>
+      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.3 3.4 2.4 17a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.4a2 2 0 0 0-3.4 0z"/></svg></div><h3>低評価アラート</h3><p>低評価の口コミが投稿された際に通知。対応の遅れによるリスクを抑えます。</p></div>
+      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="m4 19 6-6 4 4 6-8"/><path d="M14 5h6v6"/></svg></div><h3>口コミアップ施策の提案</h3><p>傾向を分析し、件数・評価を伸ばすための具体的な施策をご提案します。</p></div>
+      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h1v1H9zM14 9h1v1h-1zM9 14h1v1H9zM14 14h1v1h-1z"/></svg></div><h3>GBP投稿代行・MEO最適化</h3><p>店舗情報の発信と最適化を行い、Googleマップ上での見つけやすさを高めます。</p></div>
+      <div class="feat-card premium-feature"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></div><h3>マーケター直接アドバイス</h3><p>プレミアムプランでは、マーケターが直接アドバイスします。</p></div>
     </div>
   </div>
 </section>
@@ -564,48 +626,42 @@
     <div class="section-head">
       <span class="eyebrow" style="color:var(--sky)">料金プラン</span>
       <h2 class="mincho">店舗の規模に合わせて選べる3プラン。</h2>
-      <p>まずはトライアルから、無理なくお試しいただけます。</p>
+      <p>ライトプランは月額¥9,800から。最短3ヶ月で、無理なく始められます。</p>
     </div>
-    <div class="price-grid">
-      <div class="price-card">
-        <div class="price-tag">トライアル</div>
-        <div class="price-num mono">¥9,800<small> / 3ヶ月</small></div>
-        <div class="price-note">期間終了後、自動的に本契約へ移行します</div>
-        <ul>
-          <li>口コミ返信サポート</li>
-          <li>簡単な戦略立案</li>
-          <li>MEO順位トラッキング</li>
-          <li>QRカード1枚</li>
-        </ul>
-      </div>
-      <div class="price-card featured">
-        <div class="price-tag">スタンダード</div>
-        <div class="price-num mono">¥19,800<small> / 月</small></div>
-        <div class="price-note">最も選ばれているプラン</div>
-        <ul>
-          <li>口コミ返信サポート・傾向分析</li>
-          <li>口コミアップの戦略立案</li>
-          <li>MEO順位トラッキング</li>
-          <li>QRカード設置サポート</li>
-          <li>GBP投稿代行 月2回（隔週定期投稿）</li>
-          <li>月次成果レポート</li>
-          <li>チャットサポート</li>
-        </ul>
-      </div>
-      <div class="price-card premium">
-        <div class="price-tag">プレミアム</div>
-        <div class="price-num mono">¥49,800<small> / 月</small></div>
-        <div class="price-note">最上位の充実プラン</div>
-        <ul>
-          <li>スタンダードの全機能</li>
-          <li class="highlight">GBP投稿代行 月4回（週次投稿・写真/FAQ/キーワード最適化）</li>
-          <li>口コミアップの戦略立案</li>
-          <li class="highlight">地域内での貴店の立ち位置分析</li>
-          <li class="highlight">今後のマーケティング戦略のご提案</li>
-          <li>専任担当による月次コンサルティング</li>
-          <li>複数店舗管理オプション</li>
-        </ul>
-      </div>
+    <div class="plan-compare-wrap" role="region" aria-label="REVUPプラン別サービス内容">
+      <table class="plan-compare">
+        <thead>
+          <tr><th scope="col">サービス項目</th><th scope="col">ライトプラン</th><th scope="col" class="standard">スタンダードプラン</th><th scope="col" class="premium">プレミアムプラン</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">月額（税抜）</th><td class="price">¥9,800</td><td class="standard price">¥19,800</td><td class="premium price">¥49,800</td></tr>
+          <tr><th scope="row">最低契約期間</th><td>3ヶ月（新規限定）</td><td class="standard">3ヶ月〜</td><td class="premium">3ヶ月〜</td></tr>
+          <tr><th scope="row">4ヶ月目以降</th><td>スタンダードへ自動移行</td><td class="standard">継続</td><td class="premium">継続</td></tr>
+          <tr><th scope="row">口コミ返信代行</th><td><span class="yes">✓</span> 無制限</td><td class="standard"><span class="yes">✓</span> 無制限</td><td class="premium"><span class="yes">✓</span> 無制限</td></tr>
+          <tr><th scope="row">GBP投稿代行</th><td><span class="no">×</span></td><td class="standard"><span class="yes">✓</span> 月2回（隔週）</td><td class="premium"><span class="yes">✓</span> 月4回（週次）</td></tr>
+          <tr><th scope="row">GBP投稿最適化</th><td><span class="no">×</span></td><td class="standard"><span class="yes">✓</span> 写真・FAQ・キーワード</td><td class="premium"><span class="yes">✓</span> 写真・FAQ・キーワード</td></tr>
+          <tr><th scope="row">月次ケアメール</th><td><span class="yes">✓</span></td><td class="standard"><span class="yes">✓</span></td><td class="premium"><span class="yes">✓</span></td></tr>
+          <tr><th scope="row">月次レポート</th><td><span class="yes">✓</span></td><td class="standard"><span class="yes">✓</span></td><td class="premium"><span class="yes">✓</span></td></tr>
+          <tr><th scope="row">詳細分析・戦略立案</th><td><span class="no">×</span></td><td class="standard"><span class="no">×</span></td><td class="premium"><span class="yes">✓</span></td></tr>
+          <tr><th scope="row">個別相談</th><td><span class="no">×</span></td><td class="standard"><span class="no">×</span></td><td class="premium"><span class="yes">✓</span></td></tr>
+          <tr><th scope="row">AIO/AEO対応最適化</th><td><span class="no">×</span></td><td class="standard"><span class="yes">✓</span></td><td class="premium"><span class="yes">✓</span></td></tr>
+        </tbody>
+        <caption>横にスクロールして、各プランの内容をご確認いただけます。</caption>
+      </table>
+    </div>
+    <div class="plan-recommendations" aria-label="プラン別のおすすめ">
+      <article class="plan-recommendation">
+        <span class="recommend-label">4ヶ月目よりスタンダードへ自動移行</span>
+        <p>まずは口コミ対応の基本を固めたい方に。返信代行と口コミアップ施策から、無理なく始められます。</p>
+      </article>
+      <article class="plan-recommendation standard">
+        <span class="recommend-label">最も選ばれるプラン</span>
+        <p>口コミ対策からAI検索対応まで一括でサポート。GBP投稿・分析・施策を強化したい店舗におすすめです。</p>
+      </article>
+      <article class="plan-recommendation premium">
+        <span class="recommend-label">マーケター直接アドバイス付き</span>
+        <p>より戦略的に集客を強化したい方に。MEO・AI対策・エリア戦略まで、地域で選ばれる店舗を目指します。</p>
+      </article>
     </div>
   </div>
 </section>
@@ -618,13 +674,13 @@
     <div class="hero-ctas">
       <a href="mailto:shimazu@synnergys.com" class="btn-primary btn">無料アドバイスを受ける</a>
     </div>
+    <p class="contact-note">※連絡先メールアドレスは仮のものです。公開前に実際の窓口へ差し替えてください。</p>
   </div>
 </section>
 
 <footer>
   <div class="wrap footer-inner">
     <div>運営：私産のミカタ｜REVUP（レブアップ）</div>
-    <div>AI検索時代も選ばれるお店へ、口コミ対策をサポート</div>
     <div>&copy; 2026 REVUP</div>
   </div>
 </footer>
