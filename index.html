@@ -46,8 +46,8 @@
   .nav-cta:hover{transform:translateY(-1px); box-shadow:0 8px 20px -8px rgba(46,155,214,.55);}
 
   .hero{position:relative; overflow:hidden; background:linear-gradient(120deg, var(--sky) 0%, var(--mint) 100%); color:var(--white); padding:88px 0 120px;}
-  .hero-photo{position:absolute; inset:0; background:url('assets/hero-store-welcome.png') center/cover no-repeat; opacity:.25; mix-blend-mode:soft-light; pointer-events:none; z-index:0;}
-  .clouds{position:absolute; inset:0; opacity:.5; pointer-events:none; z-index:1;}
+  .hero-photo{position:absolute; inset:0; background:url('assets/hero-store-welcome.png') center/cover no-repeat; opacity:.42; pointer-events:none; z-index:0;}
+  .clouds{position:absolute; inset:0; opacity:.28; pointer-events:none; z-index:1;}
   .wave-divider{position:absolute; left:0; right:0; bottom:-1px; line-height:0;}
   .wave-divider svg{width:100%; height:90px; display:block;}
   .hero-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center; position:relative; z-index:2;}
@@ -61,7 +61,7 @@
   .btn-ghost{border:1px solid rgba(255,255,255,.5); color:var(--white); font-weight:600; font-size:15px; padding:16px 26px; border-radius:999px; transition:background .15s ease;}
   .btn-ghost:hover{background:rgba(255,255,255,.12);}
 
-  .map-card{background:var(--white); color:var(--ink); border-radius:18px; padding:24px 24px 20px; box-shadow:var(--shadow); position:relative;}
+  .map-card{background:var(--white); color:var(--ink); border-radius:18px; padding:24px 24px 20px; box-shadow:var(--shadow); position:relative; transform:translateY(46px);}
   .map-card::before{content:"例）導入後のイメージ"; position:absolute; top:-13px; left:22px; background:var(--coral); color:#fff; font-size:11px; font-weight:700; padding:5px 12px; border-radius:999px; letter-spacing:.04em;}
   .map-card-top{display:flex; align-items:center; gap:12px; margin-bottom:12px; margin-top:6px;}
   .pin{width:36px; height:36px; border-radius:50% 50% 50% 0; background:var(--coral); transform:rotate(-45deg); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
@@ -312,6 +312,7 @@
 
   @media (max-width:860px){
     .hero-grid{grid-template-columns:1fr;}
+    .map-card{transform:translateY(22px);}
     .feat-grid{grid-template-columns:repeat(2,1fr);}
     .price-grid{grid-template-columns:1fr;}
     .plan-compare-wrap{border-radius:14px;}
@@ -369,7 +370,7 @@
     <div>
       <span class="eyebrow" style="color:#FFF7E6">REVUP</span>
       <p class="hero-kicker">Googleマップ口コミ、AI検索に対策を</p>
-      <h1 class="mincho">地域のお客様と<em>AIに選ばれるお店</em>へ。</h1>
+      <h1 class="mincho">地域のお客様と<br><em>AIに選ばれるお店</em>へ。</h1>
       <p class="lead">地域の店舗に寄り添う、口コミとAI対策の伴走パートナー。返信のサポートから分析、Googleビジネスプロフィールへの投稿、レポートまで、まるごとおまかせいただけます。</p>
       <div class="hero-ctas">
         <a href="#contact" class="btn-primary btn">まずは無料アドバイスから</a>
