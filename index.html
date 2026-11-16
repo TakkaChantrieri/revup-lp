@@ -223,6 +223,17 @@
   .founder-avatar img{width:100%; height:auto;}
   .founder-achievements{margin-top:18px; color:var(--sky); font-size:17px; font-weight:800; line-height:1.9;}
 
+  .philosophy{padding:70px 0; background:linear-gradient(135deg,#fff7ea 0%,#eefaf6 100%);}
+  .philosophy-card{position:relative; max-width:920px; margin:auto; padding:44px 48px; overflow:hidden; text-align:center; background:rgba(255,255,255,.92); border:1px solid rgba(47,191,155,.2); border-radius:24px; box-shadow:0 22px 48px -36px rgba(23,59,77,.38);}
+  .philosophy-card::before,.philosophy-card::after{content:""; position:absolute; border-radius:50%; pointer-events:none;}
+  .philosophy-card::before{width:150px; height:150px; top:-92px; left:-55px; background:rgba(255,190,60,.22);}
+  .philosophy-card::after{width:170px; height:170px; right:-90px; bottom:-112px; background:rgba(47,191,155,.18);}
+  .philosophy-card .eyebrow{color:var(--coral);}
+  .philosophy-card h2{position:relative; margin:12px 0 8px; font-size:clamp(27px,4vw,43px); line-height:1.5;}
+  .philosophy-card h2 em{color:var(--mint); font-style:normal;}
+  .philosophy-lead{position:relative; margin-bottom:14px; color:var(--sky); font-family:'Shippori Mincho B1',serif; font-size:clamp(18px,2.3vw,24px); font-weight:800;}
+  .philosophy-note{position:relative; max-width:680px; margin:auto; color:var(--sub); font-size:14px; line-height:1.9;}
+
   @media (min-width:861px){
     .fit .section-head,.problem .section-head,.solution .section-head,.flow .section-head,.pricing .section-head{max-width:none;}
     .fit .section-head h2,.problem .section-head h2,.solution .section-head h2,.flow .section-head h2,.pricing .section-head h2{white-space:nowrap; font-size:clamp(23px,2.45vw,34px); letter-spacing:0;}
@@ -402,6 +413,10 @@
     .why .num-card-head,.problem .num-card-head,.benefits .num-card-head{align-items:flex-start;}
     .why .num-card-content h3,.problem .num-card-content h3,.benefits .num-card-content h3{min-width:0; word-break:normal; overflow-wrap:anywhere;}
     .fit-card{flex-wrap:wrap;}
+    .philosophy{padding:48px 0;}
+    .philosophy-card{padding:34px 20px; border-radius:18px;}
+    .philosophy-card h2{font-size:26px; line-height:1.55;}
+    .philosophy-note{text-align:left;}
     .cta-final h2{white-space:normal; font-size:clamp(21px,7vw,28px);}
     .flow-item:nth-of-type(n+3){margin-left:0; width:100%;}
     .flow{padding:66px 0;}
@@ -575,6 +590,17 @@
         </div>
         <div class="founder-name">REVUP代表</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="philosophy" aria-labelledby="philosophyTitle">
+  <div class="wrap">
+    <div class="philosophy-card">
+      <span class="eyebrow">REVUPの理念</span>
+      <h2 id="philosophyTitle" class="mincho">お店の笑顔が、<em>お客様の笑顔</em>につながる。</h2>
+      <p class="philosophy-lead">その循環を、REVUPから。</p>
+      <p class="philosophy-note">口コミとAI対策を通じて、お店の負担を減らし、選ばれる喜びと、その先にいるお客様の満足を増やしていきます。</p>
     </div>
   </div>
 </section>
