@@ -325,6 +325,24 @@
   .plan-recommendation.standard .recommend-label{color:#11856d;}
   .plan-recommendation.premium .recommend-label{color:#a67417;}
   .plan-recommendation p{font-size:13px; color:var(--sub); line-height:1.8;}
+  .partner-offer{position:relative; display:grid; grid-template-columns:minmax(0,1.45fr) minmax(260px,.55fr); gap:30px; align-items:center; margin-top:34px; padding:34px; color:#fff; background:linear-gradient(135deg, var(--navy) 0%, #164c63 58%, #168b82 100%); border-radius:22px; overflow:hidden; box-shadow:0 22px 48px -32px rgba(11,49,66,.65);}
+  .partner-offer::after{content:"3"; position:absolute; right:-6px; top:-60px; color:rgba(255,255,255,.07); font:800 240px/1 'JetBrains Mono',monospace; pointer-events:none;}
+  .partner-copy,.partner-action{position:relative; z-index:1;}
+  .partner-limited{display:inline-flex; align-items:center; gap:8px; padding:7px 13px; margin-bottom:14px; color:var(--navy); background:var(--sun); border-radius:999px; font-size:12px; font-weight:800;}
+  .partner-offer h3{font-family:'Shippori Mincho B1',serif; font-size:clamp(25px,3vw,36px); line-height:1.45; margin-bottom:10px;}
+  .partner-lead{color:#dff5f1; font-size:14px; line-height:1.8; max-width:62ch;}
+  .partner-benefits{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px 18px; margin-top:20px;}
+  .partner-benefits li{position:relative; padding-left:23px; color:#f4fffc; font-size:13px; line-height:1.6;}
+  .partner-benefits li::before{content:"✓"; position:absolute; left:0; top:0; color:var(--sun); font-weight:800;}
+  .partner-action{padding:24px; text-align:center; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.24); border-radius:18px; backdrop-filter:blur(5px);}
+  .partner-price-label{font-size:12px; color:#d7eeeb;}
+  .partner-price{display:flex; align-items:baseline; justify-content:center; gap:4px; margin:6px 0 2px; font-weight:800;}
+  .partner-price strong{font:800 36px/1.2 'JetBrains Mono',monospace; color:#fff;}
+  .partner-price span{font-size:14px;}
+  .partner-term{font-size:12px; color:#d7eeeb; margin-bottom:17px;}
+  .partner-action .btn{width:100%;}
+  .partner-condition{margin-top:12px; font-size:10.5px; line-height:1.6; color:#c9e1df;}
+  .partner-disclaimer{position:relative; z-index:1; grid-column:1 / -1; margin-top:-8px; padding-top:15px; border-top:1px solid rgba(255,255,255,.2); color:#c5dcda; font-size:10.5px; line-height:1.7;}
 
   .cta-final{background:var(--navy);}
   .cta-final::before,.cta-final::after{content:""; position:absolute; border-radius:50%; border:1px solid rgba(255,255,255,.16); width:450px; height:450px;}
@@ -349,6 +367,7 @@
     .price-grid{grid-template-columns:1fr;}
     .plan-compare-wrap{border-radius:14px;}
     .plan-recommendations{grid-template-columns:1fr;}
+    .partner-offer{grid-template-columns:1fr; padding:28px 24px;}
     .fit-grid,.problem .num-list,.benefits .num-list{grid-template-columns:1fr;}
     .ai-era-grid{grid-template-columns:1fr;}
     .case-grid{grid-template-columns:1fr;}
@@ -388,6 +407,8 @@
     .flow-list{padding-right:0;}
     .flow-item{grid-template-columns:48px minmax(0,1fr); padding:14px; gap:12px;}
     .flow-side-visual{position:static; width:150px; max-height:170px; margin:18px 0 0 auto;}
+    .partner-benefits{grid-template-columns:1fr;}
+    .partner-action{padding:22px 18px;}
     .form-modal{padding:10px;}
     .form-modal-dialog{height:92vh; border-radius:14px;}
   }
@@ -751,6 +772,29 @@
         <p>より戦略的に集客を強化したい方に。MEO・AI対策・エリア戦略まで、地域で選ばれる店舗を目指します。</p>
       </article>
     </div>
+    <aside class="partner-offer" aria-labelledby="partnerOfferTitle">
+      <div class="partner-copy">
+        <span class="partner-limited">先着3店舗限定</span>
+        <h3 id="partnerOfferTitle">REVUP導入パートナー募集</h3>
+        <p class="partner-lead">事例づくりにご協力いただける店舗限定で、口コミ対応とGoogleマップ対策を3ヶ月間伴走します。</p>
+        <ul class="partner-benefits">
+          <li>初期費用0円</li>
+          <li>口コミ・GBPの無料診断</li>
+          <li>QRカードと初期施策を作成</li>
+          <li>口コミ返信サポート</li>
+          <li>月次分析レポート</li>
+          <li>店舗に合わせた改善提案</li>
+        </ul>
+      </div>
+      <div class="partner-action">
+        <p class="partner-price-label">導入パートナー特別プラン</p>
+        <p class="partner-price"><strong>9,800</strong><span>円／月</span></p>
+        <p class="partner-term">税抜・3ヶ月間</p>
+        <button type="button" class="btn-primary btn" data-form-open>無料診断を申し込む</button>
+        <p class="partner-condition">匿名での事例制作にご協力いただける店舗が対象です。</p>
+      </div>
+      <p class="partner-disclaimer">※本プランは数値成果を保証するものではありません。3ヶ月間に実施する支援内容を明確にし、店舗の状況に合わせて伴走します。募集枠が埋まり次第終了します。</p>
+    </aside>
   </div>
 </section>
 
