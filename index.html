@@ -261,6 +261,25 @@
   .feat-card.premium-feature{background:#f6effb;}
   .premium-feature .feat-icon{background:linear-gradient(135deg, #a46bd3, #6f55c7);}
 
+  .model-cases{background:#f4faf8;}
+  .model-cases::before{content:"CASE"; position:absolute; right:3%; top:-58px; font:700 clamp(100px,17vw,230px)/1 'JetBrains Mono',monospace; color:rgba(47,191,155,.07); letter-spacing:-.08em;}
+  .case-intro{max-width:760px;}
+  .case-grid{position:relative; z-index:1; display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .case-card{background:#fff; border:1px solid #d7e9e4; border-radius:20px; padding:26px 24px 24px; box-shadow:0 18px 38px -30px rgba(23,59,77,.38);}
+  .case-card-head{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:22px;}
+  .case-type{font-size:17px; font-weight:800; color:var(--ink);}
+  .case-label{font-size:10.5px; font-weight:700; color:var(--mint); background:#e8f8f3; border-radius:999px; padding:6px 10px; white-space:nowrap;}
+  .case-metric{display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:10px; padding:16px 14px; background:var(--mist); border-radius:14px; text-align:center;}
+  .case-metric small{display:block; color:var(--sub); font-size:10.5px; margin-bottom:4px;}
+  .case-metric strong{display:block; color:var(--ink); font:700 25px/1.2 'JetBrains Mono',monospace;}
+  .case-metric .after strong{color:var(--mint);}
+  .case-arrow{color:var(--coral); font-size:20px; font-weight:800;}
+  .case-submetric{display:flex; justify-content:space-between; gap:12px; margin:13px 2px 0; padding-bottom:15px; border-bottom:1px solid var(--line); font-size:12.5px; color:var(--sub);}
+  .case-submetric strong{color:var(--sky); font-size:13.5px;}
+  .case-comment{margin-top:16px; font-size:13px; color:var(--ink); line-height:1.8;}
+  .case-comment::before{content:"想定コメント"; display:block; margin-bottom:5px; color:var(--coral); font-size:10.5px; font-weight:800; letter-spacing:.06em;}
+  .case-note{position:relative; z-index:1; margin-top:22px; padding:14px 18px; border-left:3px solid var(--sun); background:#fffaf0; color:var(--sub); font-size:11.5px; line-height:1.75;}
+
   .flow{background:#fff9e9; padding:78px 0;}
   .flow .wrap{position:relative;}
   .flow .section-head{margin-left:0; margin-bottom:28px; text-align:left;}
@@ -332,6 +351,7 @@
     .plan-recommendations{grid-template-columns:1fr;}
     .fit-grid,.problem .num-list,.benefits .num-list{grid-template-columns:1fr;}
     .ai-era-grid{grid-template-columns:1fr;}
+    .case-grid{grid-template-columns:1fr;}
     .solution .feat-grid{grid-template-columns:repeat(2,1fr);}
     .fit-content-layout{grid-template-columns:1fr;}
     .fit-side-visual{width:min(260px,70%); margin:0 0 0 auto; order:-1;}
@@ -616,6 +636,43 @@
       <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h1v1H9zM14 9h1v1h-1zM9 14h1v1H9zM14 14h1v1h-1z"/></svg></div><h3>GBP投稿代行・MEO最適化</h3><p>店舗情報の発信と最適化を行い、Googleマップ上での見つけやすさを高めます。</p></div>
       <div class="feat-card premium-feature"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></div><h3>マーケター直接アドバイス</h3><p>プレミアムプランでは、マーケターが直接アドバイスします。</p></div>
     </div>
+  </div>
+</section>
+
+<section class="model-cases">
+  <div class="wrap">
+    <div class="section-head case-intro">
+      <span class="eyebrow" style="color:var(--mint)">導入イメージ｜想定モデルケース</span>
+      <h2 class="mincho">3ヶ月後、こんな変化を目指します。</h2>
+      <p>口コミ数がまだ少ない地域店舗が、REVUPの施策を3ヶ月間継続した場合を想定したシミュレーションです。</p>
+    </div>
+    <div class="case-grid">
+      <article class="case-card">
+        <div class="case-card-head"><h3 class="case-type">地域の美容室</h3><span class="case-label">想定モデル</span></div>
+        <div class="case-metric">
+          <div><small>導入前の口コミ</small><strong>32件</strong></div><div class="case-arrow">→</div><div class="after"><small>3ヶ月後</small><strong>64件</strong></div>
+        </div>
+        <div class="case-submetric"><span>口コミ返信率</span><strong>28％ → 100％</strong></div>
+        <p class="case-comment">会計時のご案内とQRカードの活用が定着。返信も滞らなくなり、お客様が安心して選べる店舗ページを目指せます。</p>
+      </article>
+      <article class="case-card">
+        <div class="case-card-head"><h3 class="case-type">地域の整体院</h3><span class="case-label">想定モデル</span></div>
+        <div class="case-metric">
+          <div><small>導入前の口コミ</small><strong>18件</strong></div><div class="case-arrow">→</div><div class="after"><small>3ヶ月後</small><strong>38件</strong></div>
+        </div>
+        <div class="case-submetric"><span>平均評価</span><strong>4.0 → 4.3</strong></div>
+        <p class="case-comment">施術後の自然な声かけと低評価への丁寧な返信を継続。初めての方にも、院の雰囲気が伝わりやすい状態を目指せます。</p>
+      </article>
+      <article class="case-card">
+        <div class="case-card-head"><h3 class="case-type">地域の飲食店</h3><span class="case-label">想定モデル</span></div>
+        <div class="case-metric">
+          <div><small>導入前の口コミ</small><strong>47件</strong></div><div class="case-arrow">→</div><div class="after"><small>3ヶ月後</small><strong>89件</strong></div>
+        </div>
+        <div class="case-submetric"><span>口コミ返信率</span><strong>12％ → 96％</strong></div>
+        <p class="case-comment">口コミ収集と返信対応を仕組み化。Googleビジネスプロフィールの情報発信も続け、地域での発見機会を増やします。</p>
+      </article>
+    </div>
+    <p class="case-note">※上記は実在する店舗の導入実績やお客様の声ではなく、一般的な店舗状況をもとにした想定モデルケースです。成果は店舗の状況、来店数、施策の実施状況などにより異なり、数値を保証するものではありません。</p>
   </div>
 </section>
 
